@@ -1,5 +1,6 @@
 package template;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Empleado {
@@ -7,14 +8,14 @@ public class Empleado {
 	String matricula;
 	String apenom; 
 	String departamento;
-	String semana;
+	Date semana;
 	double ventas;
 	
 	// 
 	public Empleado() {}
 
 	public Empleado(String matricula, String apenom, String departamento,
-			double ventas, String semana) {
+			double ventas, Date semana) {
 		this.matricula = matricula;
 		this.apenom = apenom;
 		this.departamento = departamento;
@@ -42,10 +43,10 @@ public class Empleado {
 		this.departamento = departamento;
 	}
 
-	public String getSemana() {
+	public Date getSemana() {
 		return semana;
 	}
-	public void setSemana(String semana) {
+	public void setSemana(Date semana) {
 		this.semana = semana;
 	}
 	public double getVentas() {

@@ -2,29 +2,33 @@ package main;
 
 import java.util.*;
 
+import reverse.ListaempleadosId;
 import template.Contabilidad;
 import template.Empleado;
-import template.ListaEmpleado;
 
 public class LlenarListaEmpleado {
 
 	Rhhventas v = new Rhhventas();
 	DatContabilidad c = new DatContabilidad();
 	Empleado e = new Empleado();
-	ListaEmpleado le = new ListaEmpleado();
+	ListaempleadosId le = new ListaempleadosId();
 
 	ArrayList<Empleado> empleado = v.generarRhhventas();
 	ArrayList<Contabilidad> contabilidad = c.generarContabilidad();
-	ArrayList<ListaEmpleado> liEmp = new ArrayList<>();
+	ArrayList<ListaempleadosId> liEmp = new ArrayList<>();
+	
 	private double suma;
 	private double antes;
 	private int indice = 0;
 	
-	public void general() {
+	public ArrayList<ListaempleadosId> general() {
 		rellenar();
 		totalVentas();
 		totalGastos();
-		le.mostrarLista(liEmp);
+//		for(ListaempleadosId l:liEmp) {
+//			System.out.println(l.getMatricula());
+//		}
+		return liEmp;
 	}
 
 	public void totalGastos() {
@@ -33,8 +37,7 @@ public class LlenarListaEmpleado {
 			suma = cont.getSalario() + cont.getGastos();
 			if (existe(cont.getMatricula())) {
 				indice = getIndex(cont.getMatricula());
-				liEmp.get(indice).settGastosMes((Math.round(suma * 100.0) / 100.0));
-
+				liEmp.get(indice).setTotgastos((Math.round(suma * 100.0) / 100.0));
 			}
 		}
 	}
@@ -49,11 +52,7 @@ public class LlenarListaEmpleado {
 					if (existe(emp.getMatricula())) {
 
 						indice = getIndex(emp.getMatricula());
-						liEmp.get(indice).settVentasMes(Math.round(antes * 100.0) / 100.0);
-
-						// Opcion b
-//						liEmp.get(liEmp.size()-1).settVentasMes(Math.round(antes * 100.0) / 100.0);
-//						System.out.println(liEmp.get(indice));
+						liEmp.get(indice).setTotventas(Math.round(antes * 100.0) / 100.0);
 					}
 				}
 			}
@@ -66,14 +65,14 @@ public class LlenarListaEmpleado {
 			if (existe(em.getMatricula())) {
 				continue;
 			} else {
-				liEmp.add(new ListaEmpleado(em.getMatricula(), em.getDepartamento(), 0, 0));
+				liEmp.add(new ListaempleadosId(em.getApenom(),em.getDepartamento(),em.getSemana(),em.getMatricula(),0.0,0.0));
 			}
 
 		}
 	}
 
 	public boolean existe(String e) {
-		for (ListaEmpleado liemp : liEmp) {
+		for (ListaempleadosId liemp : liEmp) {
 			if (liemp.getMatricula().equals(e)) {
 				return true;
 			}
@@ -83,7 +82,7 @@ public class LlenarListaEmpleado {
 	}
 
 	public int getIndex(String e) {
-		for (ListaEmpleado liemp : liEmp) {
+		for (ListaempleadosId liemp : liEmp) {
 			if (liemp.getMatricula().equals(e)) {
 				return liEmp.indexOf(liemp);
 			}

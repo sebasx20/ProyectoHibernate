@@ -26,7 +26,7 @@ public class Rhhventas {
 								rs.getString("APENOM"),
 								rs.getString("DEPARTAMENTO"),
 								rs.getDouble("VENTAS"),
-								rs.getString("semana")
+								rs.getDate("semana")
 								)
 						);
 	        }
