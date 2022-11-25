@@ -1,4 +1,4 @@
-package main;
+package obtenerDatos;
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ import template.Empleado;
 
 public class LlenarListaEmpleado {
 
-	Rhhventas v = new Rhhventas();
+	RhhVentas v = new RhhVentas();
 	DatContabilidad c = new DatContabilidad();
 	Empleado e = new Empleado();
 	ListaempleadosId le = new ListaempleadosId();
@@ -32,7 +32,7 @@ public class LlenarListaEmpleado {
 	}
 
 	public void totalGastos() {
-
+		// Calcula el total de gatos
 		for (Contabilidad cont : contabilidad) {
 			suma = cont.getSalario() + cont.getGastos();
 			if (existe(cont.getMatricula())) {
@@ -43,6 +43,7 @@ public class LlenarListaEmpleado {
 	}
 
 	public void totalVentas() {
+		// Calcula el total de Ventas
 		for (Empleado emp : empleado) {
 			antes = 0;
 			for (Empleado list : empleado) {
@@ -50,7 +51,6 @@ public class LlenarListaEmpleado {
 				if (emp.getMatricula().equalsIgnoreCase(list.getMatricula())) {
 					antes = suma + antes;
 					if (existe(emp.getMatricula())) {
-
 						indice = getIndex(emp.getMatricula());
 						liEmp.get(indice).setTotventas(Math.round(antes * 100.0) / 100.0);
 					}
@@ -60,8 +60,8 @@ public class LlenarListaEmpleado {
 	}
 	
 	public void rellenar() {
+		// Agrega el elemento al Array
 		for (Empleado em : empleado) {
-			
 			if (existe(em.getMatricula())) {
 				continue;
 			} else {
@@ -70,8 +70,9 @@ public class LlenarListaEmpleado {
 
 		}
 	}
-
+	
 	public boolean existe(String e) {
+		// Comprueba si el elemento existe en la lista
 		for (ListaempleadosId liemp : liEmp) {
 			if (liemp.getMatricula().equals(e)) {
 				return true;
@@ -80,8 +81,9 @@ public class LlenarListaEmpleado {
 		return false;
 
 	}
-
+	
 	public int getIndex(String e) {
+		// Obtiene el indice del elemento en la lista
 		for (ListaempleadosId liemp : liEmp) {
 			if (liemp.getMatricula().equals(e)) {
 				return liEmp.indexOf(liemp);

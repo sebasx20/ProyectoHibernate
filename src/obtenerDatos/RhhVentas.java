@@ -1,16 +1,16 @@
-package main;
+package obtenerDatos;
 
 import java.sql.*;
 import java.util.ArrayList;
 import paths.DbConnection;
 import template.Empleado;
 
-public class Rhhventas {
+public class RhhVentas {
 	
 	public ArrayList<Empleado> generarRhhventas() {
 		
 		ArrayList<Empleado> empleados = new ArrayList<>();
-		DbConnection db1eva = new DbConnection();
+		DbConnection db1eva = new DbConnection(); // Establece la conexión con la BBDD de MariaDB
 		String query = "select * from rrhhventas";
 		
 		try {
@@ -38,7 +38,6 @@ public class Rhhventas {
 			e.printStackTrace();
 		}
 		
-
 		// Mostrar los datos por consola
 //		Empleado emp = new Empleado();
 //		emp.mostrarEmpleados(empleados);

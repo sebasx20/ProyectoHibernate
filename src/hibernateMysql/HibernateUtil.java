@@ -1,4 +1,4 @@
-package main;
+package hibernateMysql;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

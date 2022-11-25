@@ -4,7 +4,15 @@ public class DbConnection {
 	String db = "jdbc:mariadb://localhost:3306/db1eva";
 	String user = "root";
 	String password = "root";
-
+	
+	public DbConnection() {}
+	
+	public DbConnection(String db, String user, String password) {
+		this.db = db;
+		this.user = user;
+		this.password = password;
+	}
+	
 	public String getDb() {
 		return db;
 	}
