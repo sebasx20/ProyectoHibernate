@@ -10,15 +10,17 @@ import org.hibernate.Transaction;
 // Import de Querys
 import org.hibernate.query.Query;
 
-import obtenerDatos.LlenarListaEmpleado;
+import generarDatos.LlenarListaEmpleado;
 import reverse.Listaempleados;
 import reverse.ListaempleadosId;
 
 public class Consulta {
 
 	private static SessionFactory hbsf;
+
 	Listaempleados liemp;
-	ArrayList<ListaempleadosId> liEmpID = new LlenarListaEmpleado().general();
+	LlenarListaEmpleado llenar = new LlenarListaEmpleado();
+	ArrayList<ListaempleadosId> liEmpID = llenar.generarListadoEmpleados();
 
 	public String insertarDatos() {
 		hbsf = HibernateUtil.getSessionFactory(); // Recupera la session
@@ -26,38 +28,49 @@ public class Consulta {
 		Transaction hbtr = hbse.beginTransaction(); // Crear la transaccion
 
 		try {
+			/*
+			 * Itera sobre listaempleadoId y crea nuevas liestaempleados a partir de las
+			 * listaempleadosId pasados.
+			 */
 			for (ListaempleadosId listaId : liEmpID) {
 				liemp = new Listaempleados(listaId);
 				hbse.save(liemp);
 			}
 			hbtr.commit();
-
 			hbse.close(); // Se cierra la session
+
 			return "Datos ingresados";
 		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+			// devuelve el error si llega a suceder
 			return e.toString();
 		}
 	}
 
-	public void mostrarDatos() {
-//		hbsf = HibernateUtil.getSessionFactory(); // Recupera la session
+	public void mostrarDatos(String matricula) {
+		hbsf = HibernateUtil.getSessionFactory(); // Recupera la session
 		Session hbse = hbsf.openSession(); // Crear la session para ejecutar
-		
+
 		liemp = new Listaempleados();
-		String ssql = "FROM LISTAEMPLEADOS L WHERE L.ID";
-		
+		String ssql = "FROM Listaempleados";
+
 		Query q1 = hbse.createQuery(ssql);
-		
 		List rs = q1.list();
+
 		Iterator<Listaempleados> it = rs.iterator();
-		
-		while(it.hasNext()) {
+
+		while (it.hasNext()) {
 			liemp = it.next();
-			System.out.println("ID : " + liemp.getId());
-			System.out.println("NOmbre : ");
+			if (liemp.getId().getMatricula().equals(matricula)) {
+				System.out.println("MATRICULA" + "\tDEPARTAMENTO" + "\t    APENOM" + "\t" + "\t" + 
+						"\tTOTGASTOS" + 
+						"\tTOTVENTAS" + "\t    FECHA");
+				System.out.println(liemp.getId().getMatricula() + "\t" + 
+				liemp.getId().getDepartamento() + "\t"+  "\t"+ 
+				liemp.getId().getApenom() + "\t" +
+				liemp.getId().getTotgastos() + "\t" + "\t" +
+				liemp.getId().getTotventas() + "\t" + "\t" +
+				liemp.getId().getFecha());
+			}
 		}
-		
 	}
 }

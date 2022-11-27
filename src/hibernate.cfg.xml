@@ -5,7 +5,7 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">prg</property>
-        <property name="hibernate.connection.url">jdbc:mysql://192.168.1.138/db1eva</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.1.135/db1eva</property>
         <property name="hibernate.connection.username">prg</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">none</property>
