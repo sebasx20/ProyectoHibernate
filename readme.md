@@ -48,8 +48,9 @@ En este `package` se encuentran los archivos que consolidaran la información so
 
 * `Contabilidad` Contiene el método `generarContabilidad` que primero obtiene los datos del fichero `.dat ` y los almacena en un array de objetos de Contabilidad invocando al constructor definido en esta misma clase.
 
-* `Empleado` Contiene el método `generarRhhventas` realiza un Query a la base de datos `MariaDB`. 
-    * `SELECT matricula,apenom, departamento,  ROUND(SUM(ventas),5) AS ventas, semana FROM rrhhventas GROUP BY matricula` (Los datos se suman en la misma `select`).
-    * El resultado de la query se almacena en un array de objetos de Empleados invocando al constructor definido en esta misma clase.
+* `Empleado` Contiene el método `generarRhhventas` realiza un Query a la base de datos `MariaDB`. El resultado de la query se almacena en un array de objetos de Empleados invocando al constructor definido en esta misma clase (Los datos se suman en la misma `select`).
+    ```sql
+    SELECT matricula,apenom, departamento,  ROUND(SUM(ventas),5) AS ventas, semana FROM rrhhventas GROUP BY matricula
+    ````
 
 * `LlenarListaEmpleados` Invoca a los dos métodos anteriores y consolida la información.
